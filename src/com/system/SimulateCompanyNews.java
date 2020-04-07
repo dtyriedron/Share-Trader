@@ -9,11 +9,12 @@ public class SimulateCompanyNews {
     }
 
     public static void main(String[] args) {
+
+        simulateNews();
+    }
+    public static String simulateNews(){
         newsList = new String[]{"adrien smith has become our owner", "john smith has left his role as financial director",
                 "Corona virus Update", "quarterly update", "yearly update"};
-        simulateNews("SNAP");
-    }
-    public static String simulateNews(String nameOfCompany){
         Random r = new Random();
         int low = 0;
         int high = 4;

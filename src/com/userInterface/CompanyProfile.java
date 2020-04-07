@@ -3,13 +3,23 @@ package com.userInterface;
 import com.databases.DbEditRow;
 import com.system.PeriodicUpdate;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class CompanyProfile extends javax.swing.JFrame {
 
     /**
      * Creates new form com.userInterface.CompanyProfile
      */
+    public CompanyProfile(String code, String nameOfCompany, String news, String price, String dayChange, String cur) {
+        initComponents();
+        codeLbl.setText(code);
+        companyNameLbl.setText(nameOfCompany);
+        showPriceLbl.setText(price+ " "+ cur);
+        showDayChangeLbl.setText(dayChange);
+        newsLstMdl.addElement(news);
+    }
+
     public CompanyProfile() {
         initComponents();
     }
@@ -36,7 +46,7 @@ public class CompanyProfile extends javax.swing.JFrame {
         periodLowLbl = new javax.swing.JLabel();
         showDayChangeLbl = new javax.swing.JLabel();
         showPeriodHighLbl = new javax.swing.JLabel();
-        showPeriodLowLbl = new javax.swing.JLabel();
+//        showPeriodLowLbl = new javax.swing.JLabel();
         addToWatchBtn = new javax.swing.JButton();
         SetAlertsPane = new javax.swing.JPanel();
         setMinSpr = new javax.swing.JSeparator();
@@ -102,7 +112,7 @@ public class CompanyProfile extends javax.swing.JFrame {
 
         showPeriodHighLbl.setText("25 USD");
 
-        showPeriodLowLbl.setText("22 USD");
+       // showPeriodLowLbl.setText("22 USD");
 
         javax.swing.GroupLayout companyDetailsPaneLayout = new javax.swing.GroupLayout(companyDetailsPane);
         companyDetailsPane.setLayout(companyDetailsPaneLayout);
@@ -110,48 +120,28 @@ public class CompanyProfile extends javax.swing.JFrame {
                 companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(companyNameSpr, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(companyDetailsPaneLayout.createSequentialGroup()
-                                .addContainerGap()
                                 .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(companyDetailsPaneLayout.createSequentialGroup()
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(companyDetailsPaneLayout.createSequentialGroup()
+                                                                .addComponent(priceLbl)
+                                                                .addGap(50, 50, 50)
+                                                                .addComponent(showPriceLbl))
+                                                        .addGroup(companyDetailsPaneLayout.createSequentialGroup()
+                                                                .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(dayChangeLbl)
+                                                                        .addComponent(sharesLbl))
+                                                                .addGap(24, 24, 24)
+                                                                .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(showSharesLbl)
+                                                                        .addComponent(showDayChangeLbl)))))
+                                        .addGroup(companyDetailsPaneLayout.createSequentialGroup()
+                                                .addContainerGap()
                                                 .addComponent(codeLbl)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(companyNameLbl))
-                                        .addGroup(companyDetailsPaneLayout.createSequentialGroup()
-                                                .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(dayHighLbl)
-                                                        .addComponent(priceLbl)
-                                                        .addComponent(dayLowLbl))
-                                                .addGap(32, 32, 32)
-                                                .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(showDayHighLbl)
-                                                        .addComponent(showDayLowLbl)
-                                                        .addComponent(showPriceLbl)))
-                                        .addGroup(companyDetailsPaneLayout.createSequentialGroup()
-                                                .addComponent(dayChangeLbl)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(showDayChangeLbl)))
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(companyDetailsPaneLayout.createSequentialGroup()
-                                                .addComponent(openPriceLbl)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(showOpenPriceLbl))
-                                        .addGroup(companyDetailsPaneLayout.createSequentialGroup()
-                                                .addComponent(sharesLbl)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(showSharesLbl))
-                                        .addGroup(companyDetailsPaneLayout.createSequentialGroup()
-                                                .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(companyDetailsPaneLayout.createSequentialGroup()
-                                                                .addComponent(periodLowLbl)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(showPeriodLowLbl))
-                                                        .addGroup(companyDetailsPaneLayout.createSequentialGroup()
-                                                                .addComponent(periodHighLbl)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                .addComponent(showPeriodHighLbl)))
-                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addComponent(companyNameLbl)))
+                                .addContainerGap(123, Short.MAX_VALUE))
         );
         companyDetailsPaneLayout.setVerticalGroup(
                 companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,28 +155,16 @@ public class CompanyProfile extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(priceLbl)
-                                        .addComponent(showPriceLbl)
-                                        .addComponent(periodHighLbl)
-                                        .addComponent(showPeriodHighLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(showPriceLbl))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(dayHighLbl)
-                                        .addComponent(showDayHighLbl)
-                                        .addComponent(periodLowLbl)
-                                        .addComponent(showPeriodLowLbl))
+                                        .addComponent(dayChangeLbl)
+                                        .addComponent(showDayChangeLbl))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(sharesLbl)
-                                        .addComponent(showSharesLbl)
-                                        .addComponent(dayLowLbl)
-                                        .addComponent(showDayLowLbl))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 136, Short.MAX_VALUE)
-                                .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(openPriceLbl)
-                                        .addComponent(showOpenPriceLbl)
-                                        .addComponent(dayChangeLbl)
-                                        .addComponent(showDayChangeLbl))
-                                .addContainerGap())
+                                        .addComponent(showSharesLbl))
+                                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         addToWatchBtn.setText("Add to watchlist");
@@ -252,7 +230,7 @@ public class CompanyProfile extends javax.swing.JFrame {
                                                 .addGroup(SetAlertsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addComponent(setMinBtn)
                                                         .addGroup(SetAlertsPaneLayout.createSequentialGroup()
-                                                                .addComponent(setMinCurLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(setMinCurLbl)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                 .addComponent(setMinTb, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                 .addGap(13, 13, 13))
@@ -305,11 +283,8 @@ public class CompanyProfile extends javax.swing.JFrame {
         newsSpr.setBackground(new java.awt.Color(1, 1, 1));
         newsSpr.setForeground(new java.awt.Color(1, 1, 1));
 
-        newsLst.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        newsLstMdl = new DefaultListModel();
+        newsLst.setModel(newsLstMdl);
         newsScroll.setViewportView(newsLst);
 
         javax.swing.GroupLayout newsPaneLayout = new javax.swing.GroupLayout(newsPane);
@@ -403,7 +378,7 @@ public class CompanyProfile extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>
+    }
 
     private void addToWatchBtnActionPerformed(java.awt.event.ActionEvent evt) {
         //edit db to add the current user to the list of users that follow this share
@@ -470,14 +445,14 @@ public class CompanyProfile extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify
+
     private javax.swing.JPanel SetAlertsPane;
     private javax.swing.JButton addToWatchBtn;
     private javax.swing.JSeparator alertPaneSpr;
     private javax.swing.JButton backBtn;
     private javax.swing.JLabel codeLbl;
     private javax.swing.JPanel companyDetailsPane;
-    private javax.swing.JLabel companyNameLbl;
+    public static javax.swing.JLabel companyNameLbl;
     private javax.swing.JSeparator companyNameSpr;
     private javax.swing.JLabel dayChangeLbl;
     private javax.swing.JLabel dayHighLbl;
@@ -508,8 +483,8 @@ public class CompanyProfile extends javax.swing.JFrame {
     private javax.swing.JLabel showDayLowLbl;
     private javax.swing.JLabel showOpenPriceLbl;
     private javax.swing.JLabel showPeriodHighLbl;
-    private javax.swing.JLabel showPeriodLowLbl;
     private javax.swing.JLabel showPriceLbl;
     private javax.swing.JLabel showSharesLbl;
-    // End of variables declaration
+    private DefaultListModel newsLstMdl;
+
 }

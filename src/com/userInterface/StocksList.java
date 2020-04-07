@@ -1,7 +1,10 @@
 package com.userInterface;
 
 import com.databases.DbGetData;
+import com.system.SimulateCompanyNews;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -56,6 +59,13 @@ public class StocksList extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+
+        stocksList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                stocksListMouseClicked(evt);
+            }
+        });
+
         jScrollPane2.setViewportView(stocksList);
 
         searchFilterPane.setBackground(new java.awt.Color(133, 164, 192));
@@ -206,11 +216,27 @@ public class StocksList extends javax.swing.JFrame {
     }
 
     // get selected row on mouse click
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {
+    private void stocksListMouseClicked(java.awt.event.MouseEvent evt) {
+        //get the details from the table
+        DefaultTableModel model;
+        model = (DefaultTableModel)stocksList.getModel();
+        int index = stocksList.getSelectedRow();
+        String code = model.getValueAt(index,0).toString();
+        String nameOfCompany = model.getValueAt(index,1).toString();
+        String cur = model.getValueAt(index,2).toString();
+        String price = model.getValueAt(index, 3).toString();
+        String dayChange = model.getValueAt(index, 4).toString();
 
-//           index = stocksList.getSelectedRow();
-//           JTextField1.setText(model.getValueAt(index, 0).toString());
+        //generate random news for the company about to be displayed
+        String news = SimulateCompanyNews.simulateNews();
 
+        //send the user to the company profile page
+        CompanyProfile cp = new CompanyProfile(code, nameOfCompany, news, price, dayChange, cur);
+        cp.setVisible(true);
+        cp.pack();
+        cp.setLocationRelativeTo(null);
+        cp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
     }
 
     // display row values on keys click
