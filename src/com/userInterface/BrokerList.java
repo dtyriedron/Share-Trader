@@ -1,6 +1,10 @@
 package com.userInterface;
 
+import com.databases.DbGetData;
+import com.system.SimulateCompanyNews;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 
 public class BrokerList extends javax.swing.JFrame {
@@ -22,13 +26,11 @@ public class BrokerList extends javax.swing.JFrame {
         homeBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        brokerData = DbGetData.getDbBrokerData();
 
         brokerListTbl.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
-                        {null, null, null},
-                        {null, null, null},
-                        {null, null, null},
-                        {null, null, null}
+                        {brokerData[0]+ " "+brokerData[1], brokerData[2], brokerData[3]},
                 },
                 new String [] {
                         "Broker", "Rating", "Specialist Domain"
@@ -45,6 +47,12 @@ public class BrokerList extends javax.swing.JFrame {
         brokerListTbl.setMaximumSize(new java.awt.Dimension(500, 500));
         brokerListTbl.setPreferredSize(new java.awt.Dimension(500, 500));
         brokerListScroll.setViewportView(brokerListTbl);
+
+        brokerListTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                brokerListMouseClicked(evt);
+            }
+        });
 
         backBtn.setText("Back");
         backBtn.setMaximumSize(new java.awt.Dimension(61, 23));
@@ -148,10 +156,35 @@ public class BrokerList extends javax.swing.JFrame {
         });
     }
 
+    // get selected row on mouse click
+    private void brokerListMouseClicked(java.awt.event.MouseEvent evt) {
+        //get data from db and send it to the brokerlist window
+        //get the details from the table
+        DefaultTableModel model;
+        model = (DefaultTableModel)brokerListTbl.getModel();
+
+
+        int index = brokerListTbl.getSelectedRow();
+        String brokerName = model.getValueAt(index,0).toString();
+        String brokerRating = model.getValueAt(index,1).toString();
+        String domain = model.getValueAt(index,2).toString();
+        String contacts = brokerData[4];
+        String brokerRecord = brokerData[5];
+
+        //send the user to the broker profile page
+        BrokerProfile bp = new BrokerProfile(brokerName, brokerRating, domain, contacts, brokerRecord);
+        bp.setVisible(true);
+        bp.pack();
+        bp.setLocationRelativeTo(null);
+        bp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }
+
     // Variables declaration - do not modify
     private javax.swing.JButton backBtn;
     private javax.swing.JScrollPane brokerListScroll;
     private javax.swing.JTable brokerListTbl;
     private javax.swing.JButton homeBtn;
+    private String[] brokerData;
     // End of variables declaration
 }

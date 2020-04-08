@@ -46,7 +46,6 @@ public class DbGetData {
     }
 
     public static void getDbUserData(String[] data){
-        String[] output = new String[6];
         try {
             Connection myCon = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/shares?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
@@ -88,7 +87,7 @@ public class DbGetData {
         }
     }
 
-    public static String[] getDbBrokerData(){
+    public static String[] getDbBrokerSharesData(){
         String[] output = new String[6];
         try {
             Connection myCon = DriverManager.getConnection(
@@ -104,6 +103,44 @@ public class DbGetData {
 
 //            String query2 = "SELECT * from brokerstbl WHERE `id` = " + "'" + data[0] + "'" + "AND `password`= " + "'" + data[1] + "'";
 
+
+            if(myCon != null){
+                System.out.println("Successful");
+            }
+            myCon.close();
+        }
+        catch (SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }
+        return output;
+    }
+
+    public static String[] getDbBrokerData(){
+        String[] output = new String[6];
+        try {
+            Connection myCon = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/shares?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+                    "root", "");
+            //order the the table by date
+            String query1 = "SELECT * from brokertbl";
+            var statement = myCon.prepareStatement(query1);
+            ResultSet r = statement.executeQuery();
+            while(r.next()){
+                String firstName = r.getString("firstname");
+                System.out.println(firstName);
+                String lastName = r.getString("lastname");
+                int rating = r.getInt("rating");
+                String domain = r.getString("domain");
+                String contacts = r.getString("contacts");
+                String brokerRecord = r.getString("brokerrecord");
+                output[0] = firstName;
+                output[1] = lastName;
+                output[2] = String.valueOf(rating);
+                output[3] = domain;
+                output[4] = contacts;
+                output[5] = brokerRecord;
+                return output;
+            }
 
             if(myCon != null){
                 System.out.println("Successful");

@@ -21,12 +21,12 @@ public class StocksList extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
+        brokerListBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         stocksList = new javax.swing.JTable();
         searchFilterPane = new javax.swing.JPanel();
         searchBtn = new javax.swing.JButton();
         selectFromDateDc = new com.toedter.calendar.JDateChooser();
-        showDateLbl = new javax.swing.JLabel();
         selectToDateDc = new com.toedter.calendar.JDateChooser();
         FromDateLbl = new javax.swing.JLabel();
         toDateLbl = new javax.swing.JLabel();
@@ -40,7 +40,6 @@ public class StocksList extends javax.swing.JFrame {
         DbGetData getFromDb = new DbGetData();
         String[] tableData;
         tableData = getFromDb.getDbStocksData();
-        System.out.println("hey");
         System.out.println(tableData[3]);
 
         stocksList.setModel(new javax.swing.table.DefaultTableModel(
@@ -82,9 +81,6 @@ public class StocksList extends javax.swing.JFrame {
         selectFromDateDc.setMaximumSize(new java.awt.Dimension(69, 20));
         selectFromDateDc.setMinimumSize(new java.awt.Dimension(69, 20));
 
-        showDateLbl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        showDateLbl.setText("outputDate");
-
         selectToDateDc.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         selectToDateDc.setMaximumSize(new java.awt.Dimension(69, 20));
         selectToDateDc.setMinimumSize(new java.awt.Dimension(69, 20));
@@ -110,12 +106,9 @@ public class StocksList extends javax.swing.JFrame {
                                 .addGroup(searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(searchFilterSpr)
                                         .addComponent(searchFilterLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                                 .addGroup(searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(searchFilterPaneLayout.createSequentialGroup()
-                                                .addComponent(showDateLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(toDateLbl))
+                                        .addComponent(toDateLbl)
                                         .addComponent(FromDateLbl))
                                 .addGap(18, 18, 18)
                                 .addGroup(searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -137,18 +130,20 @@ public class StocksList extends javax.swing.JFrame {
                                         .addComponent(selectFromDateDc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(searchFilterPaneLayout.createSequentialGroup()
-                                                .addComponent(showDateLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGap(37, 37, 37))
-                                        .addGroup(searchFilterPaneLayout.createSequentialGroup()
-                                                .addGroup(searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(toDateLbl)
-                                                        .addComponent(searchFilterSpr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(selectToDateDc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(11, 11, 11)
-                                                .addComponent(searchBtn)
-                                                .addGap(0, 64, Short.MAX_VALUE))))
+                                        .addComponent(toDateLbl)
+                                        .addComponent(searchFilterSpr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(selectToDateDc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(11, 11, 11)
+                                .addComponent(searchBtn)
+                                .addGap(0, 64, Short.MAX_VALUE))
         );
+
+        brokerListBtn.setText("brokers");
+        brokerListBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                brokerListBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,14 +153,21 @@ public class StocksList extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
-                                        .addComponent(searchFilterPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(searchFilterPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(brokerListBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(searchFilterPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(searchFilterPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(brokerListBtn)
+                                                .addGap(0, 0, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
@@ -177,7 +179,7 @@ public class StocksList extends javax.swing.JFrame {
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yy", Locale.getDefault());
         String d = sdf.format(selectFromDateDc.getDate());
-        showDateLbl.setText(d);
+//        showDateLbl.setText(d);
     }
 
     /**
@@ -239,6 +241,16 @@ public class StocksList extends javax.swing.JFrame {
         this.dispose();
     }
 
+    private void brokerListBtnActionPerformed(java.awt.event.ActionEvent evt) {
+        //send the user to the brokerlist page
+        BrokerList bl = new BrokerList();
+        bl.setVisible(true);
+        bl.pack();
+        bl.setLocationRelativeTo(null);
+        bl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }
+
     // display row values on keys click
     private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {
 
@@ -253,7 +265,7 @@ public class StocksList extends javax.swing.JFrame {
 
 
 
-
+    private javax.swing.JButton brokerListBtn;
     private javax.swing.JLabel FromDateLbl;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton searchBtn;
@@ -262,7 +274,6 @@ public class StocksList extends javax.swing.JFrame {
     private javax.swing.JSeparator searchFilterSpr;
     private com.toedter.calendar.JDateChooser selectFromDateDc;
     private com.toedter.calendar.JDateChooser selectToDateDc;
-    private javax.swing.JLabel showDateLbl;
     private static javax.swing.JTable stocksList;
     private javax.swing.JLabel toDateLbl;
 
