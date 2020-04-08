@@ -48,16 +48,15 @@ public class CompanyProfile extends javax.swing.JFrame {
         showPeriodHighLbl = new javax.swing.JLabel();
 //        showPeriodLowLbl = new javax.swing.JLabel();
         addToWatchBtn = new javax.swing.JButton();
+        setMinMaxBtn = new javax.swing.JButton();
         SetAlertsPane = new javax.swing.JPanel();
         setMinSpr = new javax.swing.JSeparator();
         setMinLbl = new javax.swing.JLabel();
         setMinTb = new javax.swing.JTextField();
-        setMinBtn = new javax.swing.JButton();
         alertPaneSpr = new javax.swing.JSeparator();
         setMaxLbl = new javax.swing.JLabel();
         setMaxSpr = new javax.swing.JSeparator();
         setMaxTb = new javax.swing.JTextField();
-        setMaxBtn = new javax.swing.JButton();
         setMinCurLbl = new javax.swing.JLabel();
         setMaxCurLbl = new javax.swing.JLabel();
         newsPane = new javax.swing.JPanel();
@@ -181,19 +180,6 @@ public class CompanyProfile extends javax.swing.JFrame {
 
         setMinLbl.setText("Set minimum price alert");
 
-        setMinTb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setMinTbActionPerformed(evt);
-            }
-        });
-
-        setMinBtn.setText("Set");
-        setMinBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setMinBtnActionPerformed(evt);
-            }
-        });
-
         alertPaneSpr.setBackground(new java.awt.Color(1, 1, 1));
         alertPaneSpr.setForeground(new java.awt.Color(1, 1, 1));
 
@@ -208,7 +194,12 @@ public class CompanyProfile extends javax.swing.JFrame {
             }
         });
 
-        setMaxBtn.setText("Set");
+        setMinMaxBtn.setText("Set min and max");
+        setMinMaxBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setMinMaxBtnActionPerformed(evt);
+            }
+        });
 
         setMinCurLbl.setText("cur");
 
@@ -227,25 +218,24 @@ public class CompanyProfile extends javax.swing.JFrame {
                                         .addComponent(setMaxLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SetAlertsPaneLayout.createSequentialGroup()
                                                 .addGap(0, 18, Short.MAX_VALUE)
-                                                .addGroup(SetAlertsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(setMinBtn)
-                                                        .addGroup(SetAlertsPaneLayout.createSequentialGroup()
-                                                                .addComponent(setMinCurLbl)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                .addComponent(setMinTb, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(setMinCurLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(setMinTb, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(13, 13, 13))
                                         .addGroup(SetAlertsPaneLayout.createSequentialGroup()
-                                                .addGroup(SetAlertsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(setMinLbl)
-                                                        .addComponent(setMaxCurLbl))
+                                                .addComponent(setMinLbl)
                                                 .addGap(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap())
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SetAlertsPaneLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(SetAlertsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(setMaxTb, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(setMaxBtn, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addContainerGap(20, Short.MAX_VALUE)
+                                .addComponent(setMaxCurLbl)
+                                .addGap(18, 18, 18)
+                                .addComponent(setMaxTb, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(25, 25, 25))
+                        .addGroup(SetAlertsPaneLayout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(setMinMaxBtn)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         SetAlertsPaneLayout.setVerticalGroup(
                 SetAlertsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,19 +249,17 @@ public class CompanyProfile extends javax.swing.JFrame {
                                         .addComponent(setMinTb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(setMinCurLbl))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(setMinBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(alertPaneSpr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(setMaxLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(setMaxSpr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(SetAlertsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(setMaxTb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(setMaxCurLbl))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(setMaxBtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(setMinMaxBtn)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -385,15 +373,13 @@ public class CompanyProfile extends javax.swing.JFrame {
         String user = "anything"; //temp user used user should be passed to this class when its called
         String companyCode = "SNAP"; //temp company need to take the details from the companyNameLbl
         DbEditRow.updateRows(user, companyCode);
-        PeriodicUpdate.update("SNAP");
+        //periodicupdate for news
+        PeriodicUpdate.update(null,0,0, true);
     }
 
-    private void setMinTbActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void setMinBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    private void setMinMaxBtnActionPerformed(java.awt.event.ActionEvent evt) {
+        //put this in with the set button
+        PeriodicUpdate.update(codeLbl.getText(), Double.parseDouble(setMaxTb.getText()), Double.parseDouble(setMinTb.getText()), false);
     }
 
     private void setMaxTbActionPerformed(java.awt.event.ActionEvent evt) {
@@ -467,12 +453,11 @@ public class CompanyProfile extends javax.swing.JFrame {
     private javax.swing.JLabel periodHighLbl;
     private javax.swing.JLabel periodLowLbl;
     private javax.swing.JLabel priceLbl;
-    private javax.swing.JButton setMaxBtn;
+    private javax.swing.JButton setMinMaxBtn;
     private javax.swing.JLabel setMaxCurLbl;
     private javax.swing.JLabel setMaxLbl;
     private javax.swing.JSeparator setMaxSpr;
     private javax.swing.JTextField setMaxTb;
-    private javax.swing.JButton setMinBtn;
     private javax.swing.JLabel setMinCurLbl;
     private javax.swing.JLabel setMinLbl;
     private javax.swing.JSeparator setMinSpr;

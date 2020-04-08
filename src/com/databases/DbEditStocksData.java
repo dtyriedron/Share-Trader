@@ -4,23 +4,21 @@ import com.stocksAPI.ApiCallRealTime;
 
 import java.sql.*;
 
-public class DbUpdateStocksData {
+public class DbEditStocksData {
 
     public static void main(String[] args){
-        update("SNAP");
+        //update("SNAP");
     }
 
-    public static void update(String companyCode){
+    public static void update(String[] row){
         try{
-            String[] apiOutput = ApiCallRealTime.call_me();
+//            String[] apiOutput = ApiCallRealTime.call_me();
             Connection myCon = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/shares?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
                     "root","");
-            String apiOutputJoined = "'"+apiOutput[0]+"'" +","+ "'"+apiOutput[1]+"'"+","+ "'"+apiOutput[2]+"'"+","+ "'"+apiOutput[3]+"'"+","+ "'"+apiOutput[4]+"'" +","+ "'"+apiOutput[5]+"'";
-            System.out.println(apiOutputJoined);
-            String query = "UPDATE  `stockslistdbtbl` SET `code` = '"+apiOutput[0]+"', `name` = '"+apiOutput[1]+"'," +
-                    " `cur` = '"+apiOutput[2]+"', `price` = '"+apiOutput[3]+"'" +"," +
-                    "`+/-` = '"+apiOutput[4]+"', `+/-%` = '"+apiOutput[5]+"' WHERE `stockslistdbtbl`.`code` = '"+companyCode+"';";
+            String query = "UPDATE  `stockslistdbtbl` SET `code` = '"+row[0]+"', `name` = '"+row[1]+"'," +
+                    " `cur` = '"+row[2]+"', `price` = '"+row[3]+"'" +"," +
+                    "`+/-` = '"+row[4]+"', `+/-%` = '"+row[5]+"', `date` = '"+row[6]+"' WHERE `stockslistdbtbl`.`code` = '"+row[0]+"';";
             var statement = myCon.prepareStatement(query);
             statement.executeUpdate();
 

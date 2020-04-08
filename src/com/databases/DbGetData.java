@@ -11,8 +11,47 @@ public class DbGetData {
     }
 
 
+    public static String[] getStock(String companyCode){
+        String[] output = new String[7];
+        try{
+            Connection myCon = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/shares?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+                    "root","");
+            String query = "SELECT * from stockslistdbtbl WHERE `code` = '"+companyCode+"'";
+            var statement = myCon.prepareStatement(query);
+            ResultSet r = statement.executeQuery();
 
-    public String[] getDbStocksData(){
+            while(r.next()){
+                String code = r.getString("code");
+                String name = r.getString("name");
+                String cur = r.getString("cur");
+                double price = r.getDouble("price");
+                double riseOrFall = r.getDouble("+/-");
+                double riseOrFallPercent = r.getDouble("+/-%");
+                Date date = r.getDate("date");
+                output[0] = code;
+                output[1] = name;
+                output[2] = cur;
+                output[3] = String.valueOf(price);
+                output[4] = String.valueOf(riseOrFall);
+                output[5] = String.valueOf(riseOrFallPercent);
+                output[6] = String.valueOf(date);
+                System.out.println(output[6]);
+                return output;
+            }
+
+            if(myCon != null){
+                System.out.println("Successful");
+            }
+            myCon.close();
+        }
+        catch (SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }
+        return output;
+    }
+
+    public static String[] getDbStocksData(){
         String[] output = new String[7];
         try{
             Connection myCon = DriverManager.getConnection(
