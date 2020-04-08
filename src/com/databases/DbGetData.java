@@ -2,6 +2,7 @@ package com.databases;
 
 import javax.swing.*;
 import java.sql.*;
+import java.util.Vector;
 
 public class DbGetData {
 
@@ -9,8 +10,10 @@ public class DbGetData {
 
     }
 
+
+
     public String[] getDbStocksData(){
-        String[] output = new String[6];
+        String[] output = new String[7];
         try{
             Connection myCon = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/shares?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
@@ -25,12 +28,14 @@ public class DbGetData {
                 double price = r.getDouble("price");
                 double riseOrFall = r.getDouble("+/-");
                 double riseOrFallPercent = r.getDouble("+/-%");
+                Date date = r.getDate("date");
                 output[0] = code;
                 output[1] = name;
                 output[2] = cur;
                 output[3] = String.valueOf(price);
                 output[4] = String.valueOf(riseOrFall);
                 output[5] = String.valueOf(riseOrFallPercent);
+                output[6] = String.valueOf(date);
                 return output;
             }
 
@@ -140,6 +145,45 @@ public class DbGetData {
                 output[4] = contacts;
                 output[5] = brokerRecord;
                 return output;
+            }
+
+            if(myCon != null){
+                System.out.println("Successful");
+            }
+            myCon.close();
+        }
+        catch (SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }
+        return output;
+    }
+
+    public static Vector<String> getDbSearchData(String[] data) {
+        Vector<String> output = new Vector<>();
+        try {
+            Connection myCon = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/shares?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+                    "root", "");
+            //order the the table by date
+            String query = "SELECT * from historicstocklisttbl WHERE `code` = '"+data[0]+"'" +"AND `date` BETWEEN '"+data[1]+"' AND '"+data[2]+"'" ;
+            var statement = myCon.prepareStatement(query);
+            ResultSet r = statement.executeQuery();
+            while(r.next()){
+                String companyCode = r.getString("code");
+                System.out.println("hay "+ companyCode);
+                String companyName = r.getString("name");
+                String cur = r.getString("cur");
+                double price = r.getDouble("price");
+                double dayChange = r.getDouble("+/-");
+                double dayChangePercent = r.getDouble("+/-%");
+                Date date = r.getDate("date");
+                output.add(companyCode);
+                output.add(companyName);
+                output.add(cur);
+                output.add(String.valueOf(price));
+                output.add(String.valueOf(dayChange));
+                output.add(String.valueOf(dayChangePercent));
+                output.add(String.valueOf(date));
             }
 
             if(myCon != null){

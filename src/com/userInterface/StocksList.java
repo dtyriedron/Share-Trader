@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.Vector;
 
 public class StocksList extends javax.swing.JFrame {
 
@@ -32,6 +33,8 @@ public class StocksList extends javax.swing.JFrame {
         toDateLbl = new javax.swing.JLabel();
         searchFilterLbl = new javax.swing.JLabel();
         searchFilterSpr = new javax.swing.JSeparator();
+        shareCodeLbl = new javax.swing.JLabel();
+        shareCodeTb = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
@@ -40,14 +43,13 @@ public class StocksList extends javax.swing.JFrame {
         DbGetData getFromDb = new DbGetData();
         String[] tableData;
         tableData = getFromDb.getDbStocksData();
-        System.out.println(tableData[3]);
 
-        stocksList.setModel(new javax.swing.table.DefaultTableModel(
+        stockslistMdl = new javax.swing.table.DefaultTableModel(
                 new Object [][] {
-                        {tableData[0], tableData[1], tableData[2], Float.parseFloat(tableData[3]), Float.parseFloat(tableData[4]), Float.parseFloat(tableData[5]) },
+                        {tableData[0], tableData[1], tableData[2], Float.parseFloat(tableData[3]), Float.parseFloat(tableData[4]), Float.parseFloat(tableData[5]), tableData[6]},
                 },
                 new String [] {
-                        "Code", "Name", "Cur", "Price", "+/-", "+/-%"
+                        "Code", "Name", "Cur", "Price", "+/-", "+/-%", "date"
                 }
         ) {
             Class[] types = new Class [] {
@@ -57,7 +59,8 @@ public class StocksList extends javax.swing.JFrame {
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-        });
+        };
+        stocksList.setModel(stockslistMdl);
 
         stocksList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -97,6 +100,11 @@ public class StocksList extends javax.swing.JFrame {
         searchFilterSpr.setBackground(new java.awt.Color(1, 1, 1));
         searchFilterSpr.setForeground(new java.awt.Color(1, 1, 1));
 
+        shareCodeLbl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        shareCodeLbl.setText("Share Code:");
+
+        shareCodeTb.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout searchFilterPaneLayout = new javax.swing.GroupLayout(searchFilterPane);
         searchFilterPane.setLayout(searchFilterPaneLayout);
         searchFilterPaneLayout.setHorizontalGroup(
@@ -106,36 +114,49 @@ public class StocksList extends javax.swing.JFrame {
                                 .addGroup(searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(searchFilterSpr)
                                         .addComponent(searchFilterLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                                .addGroup(searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(toDateLbl)
-                                        .addComponent(FromDateLbl))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                                .addGroup(searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(shareCodeLbl)
+                                        .addGroup(searchFilterPaneLayout.createSequentialGroup()
+                                                .addGap(38, 38, 38)
+                                                .addGroup(searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(toDateLbl, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(FromDateLbl, javax.swing.GroupLayout.Alignment.TRAILING))))
                                 .addGap(18, 18, 18)
                                 .addGroup(searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(searchFilterPaneLayout.createSequentialGroup()
-                                                .addGap(0, 65, Short.MAX_VALUE)
+                                                .addGap(0, 0, Short.MAX_VALUE)
                                                 .addComponent(searchBtn))
                                         .addComponent(selectToDateDc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(selectFromDateDc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(21, 21, 21))
+                                        .addComponent(selectFromDateDc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(shareCodeTb, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27))
         );
         searchFilterPaneLayout.setVerticalGroup(
                 searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchFilterPaneLayout.createSequentialGroup()
                                 .addGap(14, 14, 14)
+                                .addComponent(searchFilterLbl)
+                                .addGap(9, 9, 9)
                                 .addGroup(searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(FromDateLbl)
-                                                .addComponent(searchFilterLbl))
-                                        .addComponent(selectFromDateDc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(toDateLbl)
                                         .addComponent(searchFilterSpr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(selectToDateDc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(11, 11, 11)
-                                .addComponent(searchBtn)
-                                .addGap(0, 64, Short.MAX_VALUE))
+                                        .addGroup(searchFilterPaneLayout.createSequentialGroup()
+                                                .addGap(55, 55, 55)
+                                                .addComponent(toDateLbl))
+                                        .addGroup(searchFilterPaneLayout.createSequentialGroup()
+                                                .addGroup(searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(shareCodeTb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(shareCodeLbl))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(searchFilterPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(FromDateLbl)
+                                                        .addGroup(searchFilterPaneLayout.createSequentialGroup()
+                                                                .addComponent(selectFromDateDc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(selectToDateDc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(searchBtn)))))
+                                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         brokerListBtn.setText("brokers");
@@ -176,12 +197,6 @@ public class StocksList extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yy", Locale.getDefault());
-        String d = sdf.format(selectFromDateDc.getDate());
-//        showDateLbl.setText(d);
-    }
-
     /**
      * @param args the command line arguments
      */
@@ -216,6 +231,56 @@ public class StocksList extends javax.swing.JFrame {
             }
         });
     }
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String fromDate = sdf.format(selectFromDateDc.getDate());
+        String toDate = sdf.format(selectToDateDc.getDate());
+        System.out.println(fromDate);
+        String companyCode = shareCodeTb.getText();
+        String[] inputData = new String[]{companyCode, fromDate, toDate};
+        Vector<String> outputData = DbGetData.getDbSearchData(inputData);
+        if (stockslistMdl.getRowCount() > 0) {
+            for (int i = stockslistMdl.getRowCount() - 1; i > -1; i--) {
+                stockslistMdl.removeRow(i);
+            }
+        }
+        Vector<String> tempRow = new Vector<>();
+        Vector<Vector<String>> tempMdl = new Vector<>();
+        for(int i=0; i<outputData.size();++i){
+            //check if the date has changed (should be unique for each row)
+
+            if((outputData.get(i).equals(outputData.get(6))) || (outputData.size()-1 == i)){
+                tempRow.add(outputData.get(i));
+                tempMdl.add((Vector<String>) tempRow.clone());
+                System.out.println("hey "+tempRow);
+                tempRow.clear();
+            }
+            else{
+                tempRow.add(outputData.get(i));
+            }
+        }
+
+        stockslistMdl = new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+                        {tempMdl.get(0).get(0), tempMdl.get(0).get(1), tempMdl.get(0).get(2),Float.parseFloat(tempMdl.get(0).get(3)), Float.parseFloat(tempMdl.get(0).get(4)), Float.parseFloat(tempMdl.get(0).get(5)), tempMdl.get(0).get(6)},
+                        {tempMdl.get(1).get(0), tempMdl.get(1).get(1), tempMdl.get(1).get(2),Float.parseFloat(tempMdl.get(1).get(3)), Float.parseFloat(tempMdl.get(1).get(4)), Float.parseFloat(tempMdl.get(1).get(5)), tempMdl.get(1).get(6) }
+                },
+                new String [] {
+                        "Code", "Name", "Cur", "Price", "+/-", "+/-%", "date"
+                }
+        ) {
+            Class[] types = new Class [] {
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        };
+        stocksList.setModel(stockslistMdl);
+    }
+
 
     // get selected row on mouse click
     private void stocksListMouseClicked(java.awt.event.MouseEvent evt) {
@@ -276,5 +341,8 @@ public class StocksList extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser selectToDateDc;
     private static javax.swing.JTable stocksList;
     private javax.swing.JLabel toDateLbl;
+    private javax.swing.JLabel shareCodeLbl;
+    private javax.swing.JTextField shareCodeTb;
+    private DefaultTableModel stockslistMdl;
 
 }
