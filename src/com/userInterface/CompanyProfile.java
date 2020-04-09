@@ -1,7 +1,9 @@
 package com.userInterface;
 
 import com.databases.DbEditRow;
+import com.databases.DbGetData;
 import com.system.PeriodicUpdate;
+import com.system.Simulate;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,6 +20,7 @@ public class CompanyProfile extends javax.swing.JFrame {
         showPriceLbl.setText(price+ " "+ cur);
         showDayChangeLbl.setText(dayChange);
         newsLstMdl.addElement(news);
+        showMajorShareholderLbl.setText(Simulate.simulateShareholder());
     }
 
     public CompanyProfile() {
@@ -46,7 +49,8 @@ public class CompanyProfile extends javax.swing.JFrame {
         periodLowLbl = new javax.swing.JLabel();
         showDayChangeLbl = new javax.swing.JLabel();
         showPeriodHighLbl = new javax.swing.JLabel();
-//        showPeriodLowLbl = new javax.swing.JLabel();
+        majorShareholderLbl = new javax.swing.JLabel();
+        showMajorShareholderLbl = new javax.swing.JLabel();
         addToWatchBtn = new javax.swing.JButton();
         setMinMaxBtn = new javax.swing.JButton();
         SetAlertsPane = new javax.swing.JPanel();
@@ -96,6 +100,15 @@ public class CompanyProfile extends javax.swing.JFrame {
         sharesLbl.setText("Shares");
 
         showSharesLbl.setText("1234");
+        majorShareholderLbl.setText("Major Shareholder");
+
+        showMajorShareholderLbl.setText("gary");
+
+        showMajorShareholderLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showMajorShareholderLblMouseClicked(evt);
+            }
+        });
 
         openPriceLbl.setText("Price open");
 
@@ -111,7 +124,6 @@ public class CompanyProfile extends javax.swing.JFrame {
 
         showPeriodHighLbl.setText("25 USD");
 
-       // showPeriodLowLbl.setText("22 USD");
 
         javax.swing.GroupLayout companyDetailsPaneLayout = new javax.swing.GroupLayout(companyDetailsPane);
         companyDetailsPane.setLayout(companyDetailsPaneLayout);
@@ -130,11 +142,13 @@ public class CompanyProfile extends javax.swing.JFrame {
                                                         .addGroup(companyDetailsPaneLayout.createSequentialGroup()
                                                                 .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addComponent(dayChangeLbl)
-                                                                        .addComponent(sharesLbl))
+                                                                        .addComponent(sharesLbl)
+                                                                        .addComponent(majorShareholderLbl))
                                                                 .addGap(24, 24, 24)
                                                                 .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addComponent(showSharesLbl)
-                                                                        .addComponent(showDayChangeLbl)))))
+                                                                        .addComponent(showDayChangeLbl)
+                                                                        .addComponent(showMajorShareholderLbl)))))
                                         .addGroup(companyDetailsPaneLayout.createSequentialGroup()
                                                 .addContainerGap()
                                                 .addComponent(codeLbl)
@@ -163,7 +177,11 @@ public class CompanyProfile extends javax.swing.JFrame {
                                 .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(sharesLbl)
                                         .addComponent(showSharesLbl))
-                                .addContainerGap(156, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(companyDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(majorShareholderLbl)
+                                        .addComponent(showMajorShareholderLbl))
+                                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         addToWatchBtn.setText("Add to watchlist");
@@ -404,6 +422,16 @@ public class CompanyProfile extends javax.swing.JFrame {
         this.dispose();
     }
 
+    private void showMajorShareholderLblMouseClicked(java.awt.event.MouseEvent evt) {
+        ShareholderProfile sh = new ShareholderProfile(Simulate.simulateShareholder(), Simulate.simulateAnnoucement(), DbGetData.getStock("BFGR"));
+        sh.setVisible(true);
+        sh.pack();
+        sh.setLocationRelativeTo(null);
+        sh.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+
+    }
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -471,5 +499,7 @@ public class CompanyProfile extends javax.swing.JFrame {
     private javax.swing.JLabel showPriceLbl;
     private javax.swing.JLabel showSharesLbl;
     private DefaultListModel newsLstMdl;
+    private javax.swing.JLabel showMajorShareholderLbl;
+    private javax.swing.JLabel majorShareholderLbl;
 
 }

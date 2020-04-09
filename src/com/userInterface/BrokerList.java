@@ -1,7 +1,6 @@
 package com.userInterface;
 
 import com.databases.DbGetData;
-import com.system.SimulateCompanyNews;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

@@ -1,7 +1,7 @@
 package com.userInterface;
 
 import com.databases.DbGetData;
-import com.system.SimulateCompanyNews;
+import com.system.Simulate;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -250,7 +250,8 @@ public class StocksList extends javax.swing.JFrame {
         for(int i=0; i<outputData.size();++i){
             //check if the date has changed (should be unique for each row)
 
-            if((outputData.get(i).equals(outputData.get(6))) || (outputData.size()-1 == i)){
+            if(((i+1) % 7 == 0)){
+//                || (outputData.size()-1 == i)
                 tempRow.add(outputData.get(i));
                 tempMdl.add((Vector<String>) tempRow.clone());
                 System.out.println("hey "+tempRow);
@@ -295,7 +296,7 @@ public class StocksList extends javax.swing.JFrame {
         String dayChange = model.getValueAt(index, 4).toString();
 
         //generate random news for the company about to be displayed
-        String news = SimulateCompanyNews.simulateNews();
+        String news = Simulate.simulateNews();
 
         //send the user to the company profile page
         CompanyProfile cp = new CompanyProfile(code, nameOfCompany, news, price, dayChange, cur);

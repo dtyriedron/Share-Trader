@@ -1,6 +1,6 @@
 package com.userInterface;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class ShareholderProfile extends javax.swing.JFrame {
 
@@ -11,50 +11,23 @@ public class ShareholderProfile extends javax.swing.JFrame {
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
-    private void initComponents() {
+    public ShareholderProfile(String shareholderName, String annoucement, String[] activity){
+        initComponents();
+        nameLbl.setText(shareholderName);
 
-        shareholderDetailsPane = new javax.swing.JPanel();
-        sharholderNameSpr = new javax.swing.JSeparator();
-        majorSharesLbl = new javax.swing.JLabel();
-        nameLbl = new javax.swing.JLabel();
-        majorSharesScroll = new javax.swing.JScrollPane();
-        shareHolderMajorSharesTbl = new javax.swing.JTable();
-        majorSharesSpr = new javax.swing.JSeparator();
-        shareholderActivityPane = new javax.swing.JPanel();
-        shareholderActivitySpr = new javax.swing.JSeparator();
-        shareholderActivityLbl = new javax.swing.JLabel();
-        shareholderActivityScroll = new javax.swing.JScrollPane();
-        shareHolderActivityTbl = new javax.swing.JTable();
-        announcementsPane = new javax.swing.JPanel();
-        announcementsSpr = new javax.swing.JSeparator();
-        announcementsLbl = new javax.swing.JLabel();
-        homeBtn = new javax.swing.JButton();
-        backBtn = new javax.swing.JButton();
+        annoucementLst.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { annoucement, };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        announcementScroll.setViewportView(annoucementLst);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(500, 500));
-
-        shareholderDetailsPane.setBackground(new java.awt.Color(133, 164, 192));
-
-        sharholderNameSpr.setBackground(new java.awt.Color(1, 1, 1));
-        sharholderNameSpr.setForeground(new java.awt.Color(1, 1, 1));
-
-        majorSharesLbl.setText("Major Shares");
-
-        nameLbl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        nameLbl.setText("ShareHolderName");
-
-        shareHolderMajorSharesTbl.setModel(new javax.swing.table.DefaultTableModel(
+        shareHolderActivityTbl.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
-                        {null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null, null, null}
+                        {activity[0], activity[1], activity[2], Float.parseFloat(activity[3]), Float.parseFloat(activity[4]), Float.parseFloat(activity[5]), activity[6]},
                 },
                 new String [] {
-                        "Code", "Name", "Cur", "Price", "+/-", "+/-%", "watch", "Date", "Profit"
+                        "Code", "Name", "Cur", "Price", "+/-", "+/-%", "Date"
                 }
         ) {
             Class[] types = new Class [] {
@@ -65,10 +38,41 @@ public class ShareholderProfile extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        majorSharesScroll.setViewportView(shareHolderMajorSharesTbl);
+        shareholderActivityScroll.setViewportView(shareHolderActivityTbl);
 
-        majorSharesSpr.setBackground(new java.awt.Color(1, 1, 1));
-        majorSharesSpr.setForeground(new java.awt.Color(1, 1, 1));
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+    private void initComponents() {
+
+        shareholderDetailsPane = new javax.swing.JPanel();
+        sharholderNameSpr = new javax.swing.JSeparator();
+        nameLbl = new javax.swing.JLabel();
+        shareholderActivityPane = new javax.swing.JPanel();
+        shareholderActivitySpr = new javax.swing.JSeparator();
+        shareholderActivityLbl = new javax.swing.JLabel();
+        shareholderActivityScroll = new javax.swing.JScrollPane();
+        shareHolderActivityTbl = new javax.swing.JTable();
+        announcementsPane = new javax.swing.JPanel();
+        announcementsSpr = new javax.swing.JSeparator();
+        announcementsLbl = new javax.swing.JLabel();
+        homeBtn = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
+        annoucementLst = new javax.swing.JList<>();
+        announcementScroll = new javax.swing.JScrollPane();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(500, 500));
+
+        shareholderDetailsPane.setBackground(new java.awt.Color(133, 164, 192));
+
+        sharholderNameSpr.setBackground(new java.awt.Color(1, 1, 1));
+        sharholderNameSpr.setForeground(new java.awt.Color(1, 1, 1));
+
+
+        nameLbl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        nameLbl.setText("ShareHolderName");
 
         javax.swing.GroupLayout shareholderDetailsPaneLayout = new javax.swing.GroupLayout(shareholderDetailsPane);
         shareholderDetailsPane.setLayout(shareholderDetailsPaneLayout);
@@ -76,19 +80,9 @@ public class ShareholderProfile extends javax.swing.JFrame {
                 shareholderDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(sharholderNameSpr, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(shareholderDetailsPaneLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(shareholderDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(shareholderDetailsPaneLayout.createSequentialGroup()
-                                                .addComponent(majorSharesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                .addContainerGap())
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, shareholderDetailsPaneLayout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                .addComponent(nameLbl)
-                                                .addGap(136, 136, 136))
-                                        .addGroup(shareholderDetailsPaneLayout.createSequentialGroup()
-                                                .addComponent(majorSharesLbl)
-                                                .addGap(0, 0, Short.MAX_VALUE))))
-                        .addComponent(majorSharesSpr)
+                                .addContainerGap(109, Short.MAX_VALUE)
+                                .addComponent(nameLbl)
+                                .addGap(136, 136, 136))
         );
         shareholderDetailsPaneLayout.setVerticalGroup(
                 shareholderDetailsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,13 +91,7 @@ public class ShareholderProfile extends javax.swing.JFrame {
                                 .addComponent(nameLbl)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(sharholderNameSpr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(majorSharesLbl)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(majorSharesSpr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(majorSharesScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         shareholderActivityPane.setBackground(new java.awt.Color(133, 164, 192));
@@ -113,6 +101,13 @@ public class ShareholderProfile extends javax.swing.JFrame {
 
         shareholderActivityLbl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         shareholderActivityLbl.setText("Shareholder Activity");
+
+        annoucementLst.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1," };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        announcementScroll.setViewportView(annoucementLst);
 
         shareHolderActivityTbl.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
@@ -182,6 +177,10 @@ public class ShareholderProfile extends javax.swing.JFrame {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(announcementsLbl)
                                 .addGap(26, 26, 26))
+                        .addGroup(announcementsPaneLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(announcementScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         announcementsPaneLayout.setVerticalGroup(
                 announcementsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,6 +189,8 @@ public class ShareholderProfile extends javax.swing.JFrame {
                                 .addComponent(announcementsLbl)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(announcementsSpr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(announcementScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -308,17 +309,15 @@ public class ShareholderProfile extends javax.swing.JFrame {
     private javax.swing.JSeparator announcementsSpr;
     private javax.swing.JButton backBtn;
     private javax.swing.JButton homeBtn;
-    private javax.swing.JLabel majorSharesLbl;
-    private javax.swing.JScrollPane majorSharesScroll;
-    private javax.swing.JSeparator majorSharesSpr;
     private javax.swing.JLabel nameLbl;
     private javax.swing.JTable shareHolderActivityTbl;
-    private javax.swing.JTable shareHolderMajorSharesTbl;
     private javax.swing.JLabel shareholderActivityLbl;
     private javax.swing.JPanel shareholderActivityPane;
     private javax.swing.JScrollPane shareholderActivityScroll;
     private javax.swing.JSeparator shareholderActivitySpr;
     private javax.swing.JPanel shareholderDetailsPane;
     private javax.swing.JSeparator sharholderNameSpr;
+    private javax.swing.JList<String> annoucementLst;
+    private javax.swing.JScrollPane announcementScroll;
     // End of variables declaration
 }

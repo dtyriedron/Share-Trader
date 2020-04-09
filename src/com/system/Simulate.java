@@ -1,9 +1,12 @@
 package com.system;
 
-import java.util.Random;
+import com.databases.DbGetData;
 
-public class SimulateCompanyNews {
-    public SimulateCompanyNews(){
+import java.util.Random;
+import java.util.Vector;
+
+public class Simulate {
+    public Simulate(){
         newsList = new String[]{"adrien smith has become our owner", "john smith has left his role as financial director",
                 "Corona virus Update", "quarterly update", "yearly update"};
     }
@@ -21,6 +24,22 @@ public class SimulateCompanyNews {
         int result = r.nextInt(high-low) + low;
         System.out.println(newsList[result]);
         return newsList[result];
+    }
+    public static String simulateShareholder(){
+        Vector<String> shareholderList = DbGetData.getDbAllUsers();
+        Random r = new Random();
+        int low = 0;
+        int high = shareholderList.size()-1;
+        int result = r.nextInt(high-low) + low;
+        return shareholderList.get(result);
+    }
+    public static String simulateAnnoucement(){
+        String[] announcements = new String[] {"bought new share, new chairmen appointed"};
+        Random r = new Random();
+        int low = 0;
+        int high = announcements.length;
+        int result = r.nextInt(high-low) + low;
+        return announcements[result];
     }
 
     private static String[] newsList;

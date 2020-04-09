@@ -89,6 +89,33 @@ public class DbGetData {
         return output;
     }
 
+    public static Vector<String> getDbAllUsers(){
+        Vector<String> outputData = new Vector<String>();
+        try {
+
+            Connection myCon = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/shares?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+                    "root", "");
+            String query = "SELECT * from shareholderstbl";
+            var statement = myCon.prepareStatement(query);
+            ResultSet r = statement.executeQuery();
+            while(r.next()){
+                String username = r.getString("username");
+                outputData.add(username);
+            }
+
+
+            if(myCon != null){
+                System.out.println("Successful");
+            }
+            myCon.close();
+        }
+        catch (SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }
+        return outputData;
+    }
+
     public static void getDbUserData(String[] data){
         try {
             Connection myCon = DriverManager.getConnection(

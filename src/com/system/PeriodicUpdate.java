@@ -54,7 +54,7 @@ public class PeriodicUpdate extends TimerTask {
 
     public void updateNews(){
         StocksList sl = new StocksList();
-        JOptionPane.showMessageDialog(sl, "News: " + SimulateCompanyNews.simulateNews());
+        JOptionPane.showMessageDialog(sl, "News: " + Simulate.simulateNews());
     }
 
     public void updateStock() throws ParseException {
@@ -78,11 +78,8 @@ public class PeriodicUpdate extends TimerTask {
 
         //change the price of this stock
         double price = Double.valueOf(data[3]);
-        double riseOrFall = Double.valueOf(data[4]);
 
-        riseOrFall = riseOrFall+1.0;
-
-        data[4] = String.valueOf(riseOrFall);
+        data[4] = String.valueOf(1);
         data[5] = String.valueOf((1.0/price)*100);
         data[3] = String.valueOf(price+1.0);
 

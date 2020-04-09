@@ -226,14 +226,15 @@ public class Register extends javax.swing.JFrame {
         }
         else{
             System.out.println("'"+username +"', '"+String.valueOf(password) +"', " +"NULL, '0', '', '"+firstname +"', '"+lastname+"'");
+            //input data into db
+            String[] userData = new String[]{username, String.valueOf(password), firstname, lastname};
+            DbInsertData.insertData("shareholderstbl", userData);
+
+            //switch to login to make sure credentials are working
+            returnToLogin();
         }
 
-        //input data into db
-        String[] userData = new String[]{username, String.valueOf(password), firstname, lastname};
-        DbInsertData.insertData("shareholderstbl", userData);
 
-        //switch to login to make sure credentials are working
-        returnToLogin();
 
     }
 
