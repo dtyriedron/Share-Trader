@@ -18,7 +18,7 @@ public class DbInsertData {
                     "root", "");
             String tableColumns = "(`code`, `name`, `cur`, `price`, `+/-`, `+/-%`, `date`)";
 
-            String[] currentStock = DbGetData.getStock(updateStock[0]);
+            String[] currentStock = DbGetData.getStockWithWatched(updateStock[0]);
             String tableValues1 = "'"+currentStock[0]+"'" +","+ "'"+currentStock[1]+"'"+","+ "'"+currentStock[2]+"'"+","+ "'"+currentStock[3]+"'"+","+ "'"+currentStock[4]+"'" +","+ "'"+currentStock[5]+"', '"+currentStock[6]+"'";
 
             //first need to put old stock in historic

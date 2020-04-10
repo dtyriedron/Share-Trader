@@ -308,6 +308,8 @@ public class StocksList extends javax.swing.JFrame {
     }
 
     private void brokerListBtnActionPerformed(java.awt.event.ActionEvent evt) {
+        //recomend broker
+        Simulate.recommendBroker();
         //send the user to the brokerlist page
         BrokerList bl = new BrokerList();
         bl.setVisible(true);

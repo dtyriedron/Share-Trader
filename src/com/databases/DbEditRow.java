@@ -6,11 +6,12 @@ import java.sql.*;
 
 public class DbEditRow {
 
-    public static void main(String[] args){
-        updateRows("Jes","SNAP");
+    public static void main(String[] args)
+    {
+        updateRowsUserWatch("Jes","SNAP");
     }
 
-    public static void updateRows(String user, String companyCode){
+    public static void updateRowsUserWatch(String user, String companyCode){
         try{
             //String[] apiOutput = ApiCallRealTime.call_me();
             Connection myCon = DriverManager.getConnection(

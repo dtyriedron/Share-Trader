@@ -100,8 +100,9 @@ public class DbGetData {
             var statement = myCon.prepareStatement(query);
             ResultSet r = statement.executeQuery();
             while(r.next()){
-                String username = r.getString("username");
-                outputData.add(username);
+                String firstname = r.getString("firstname");
+                String lastname = r.getString("lastname");
+                outputData.add(firstname+ " "+lastname);
             }
 
 
@@ -158,34 +159,6 @@ public class DbGetData {
         }
     }
 
-    public static String[] getDbBrokerSharesData(){
-        String[] output = new String[6];
-        try {
-            Connection myCon = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/shares?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
-                    "root", "");
-            //order the the table by date
-            String query1 = "SELECT * from brokerssharestbl WHERE brokerssharestbl.date < @CurrentDate\n" +
-                    "ORDER BY brokerssharestbl.date DESC";
-            var statement = myCon.prepareStatement(query1);
-            ResultSet r = statement.executeQuery();
-//            String
-
-
-//            String query2 = "SELECT * from brokerstbl WHERE `id` = " + "'" + data[0] + "'" + "AND `password`= " + "'" + data[1] + "'";
-
-
-            if(myCon != null){
-                System.out.println("Successful");
-            }
-            myCon.close();
-        }
-        catch (SQLException sqlEx){
-            sqlEx.printStackTrace();
-        }
-        return output;
-    }
-
     public static String[] getDbBrokerData(){
         String[] output = new String[6];
         try {
@@ -193,7 +166,7 @@ public class DbGetData {
                     "jdbc:mysql://localhost:3306/shares?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
                     "root", "");
             //order the the table by date
-            String query1 = "SELECT * from brokertbl";
+            String query1 = "SELECT * from brokertbl ORDER BY rating DESC";
             var statement = myCon.prepareStatement(query1);
             ResultSet r = statement.executeQuery();
             while(r.next()){
@@ -224,6 +197,47 @@ public class DbGetData {
         return output;
     }
 
+    public static String[] getStockWithWatched(String companyCode){
+        String[] output = new String[8];
+        try{
+            Connection myCon = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/shares?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+                    "root","");
+            String query = "SELECT * from stockslistdbtbl WHERE `code` = '"+companyCode+"'";
+            var statement = myCon.prepareStatement(query);
+            ResultSet r = statement.executeQuery();
+
+            while(r.next()){
+                String code = r.getString("code");
+                String name = r.getString("name");
+                String cur = r.getString("cur");
+                double price = r.getDouble("price");
+                double riseOrFall = r.getDouble("+/-");
+                double riseOrFallPercent = r.getDouble("+/-%");
+                Date date = r.getDate("date");
+                String watchedBy = r.getString("watchedBy");
+
+                output[0] = code;
+                output[1] = name;
+                output[2] = cur;
+                output[3] = String.valueOf(price);
+                output[4] = String.valueOf(riseOrFall);
+                output[5] = String.valueOf(riseOrFallPercent);
+                output[6] = String.valueOf(date);
+                output[7] = watchedBy;
+                return output;
+            }
+
+            if(myCon != null){
+                System.out.println("Successful");
+            }
+            myCon.close();
+        }
+        catch (SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }
+        return output;
+    }
     public static Vector<String> getDbSearchData(String[] data) {
         Vector<String> output = new Vector<>();
         try {

@@ -1,7 +1,10 @@
 package com.system;
 
 import com.databases.DbGetData;
+import com.userInterface.BrokerList;
+import com.userInterface.StocksList;
 
+import javax.swing.*;
 import java.util.Random;
 import java.util.Vector;
 
@@ -40,6 +43,12 @@ public class Simulate {
         int high = announcements.length;
         int result = r.nextInt(high-low) + low;
         return announcements[result];
+    }
+
+    public static void recommendBroker(){
+        BrokerList bl = new BrokerList();
+        String[] data = DbGetData.getDbBrokerData();
+        JOptionPane.showMessageDialog(bl,"Recommended Broker: " + data[0] + " " + data[1]);
     }
 
     private static String[] newsList;

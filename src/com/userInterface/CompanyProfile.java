@@ -390,7 +390,7 @@ public class CompanyProfile extends javax.swing.JFrame {
         //edit db to add the current user to the list of users that follow this share
         String user = "anything"; //temp user used user should be passed to this class when its called
         String companyCode = "SNAP"; //temp company need to take the details from the companyNameLbl
-        DbEditRow.updateRows(user, companyCode);
+        DbEditRow.updateRowsUserWatch(user, companyCode);
         //periodicupdate for news
         PeriodicUpdate.update(null,0,0, true);
     }
